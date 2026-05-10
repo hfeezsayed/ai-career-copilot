@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  /* =========================
+     COLORS
+  ========================= */
+
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #181818;
+
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  --border-color: #27272a;
+
+  --accent-primary: #7c3aed;
+  --accent-hover: #8b5cf6;
+
+  /* =========================
+     TYPOGRAPHY
+  ========================= */
+
+  --font-sans: var(--font-geist-sans);
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+  --text-4xl: 40px;
+
+  /* =========================
+     HEADING STYLES
+  ========================= */
+
+  --heading-color: #ffffff;
+
+  --h1-size: 40px;
+  --h2-size: 32px;
+  --h3-size: 24px;
+  --h4-size: 20px;
+
+  /* =========================
+     RADIUS
+  ========================= */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}

@@ -1,0 +1,19 @@
+# dependencies
+node_modules
+venv
+
+# next
+.next
+
+# env
+.env
+
+# python
+__pycache__/
+*.pyc
+
+# vscode
+.vscode
+
+# logs
+*.log
