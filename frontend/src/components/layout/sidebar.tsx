@@ -26,7 +26,7 @@ export default function Sidebar({ isOpen, closeSidebar }: SidebarProps) {
       <aside
         className={`
           fixed top-0 left-0 z-50
-          h-screen w-[240px]
+          h-screen w-[220px]
           bg-black
           border-r border-white/10
           px-5 py-6

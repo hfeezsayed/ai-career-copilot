@@ -98,3 +98,25 @@ export async function renameChat(
 
   return await res.json();
 }
+
+
+// Resume Analyzer
+export async function uploadResume(file: File) {
+  const formData = new FormData();
+
+  formData.append("file", file);
+
+  const response = await fetch(
+    "http://127.0.0.1:8000/resume/upload",
+    {
+      method: "POST",
+      body: formData,
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to upload resume.");
+  }
+
+  return response.json();
+}

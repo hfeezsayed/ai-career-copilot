@@ -17,22 +17,19 @@ from app.services.chat_service import (
 
 router = APIRouter()
 
+
 class RenameChatRequest(BaseModel):
     title: str
 
+
 # Rename Chat
 @router.put("/chat/{chat_id}")
-async def rename_chat(
-    chat_id: str,
-    data: RenameChatRequest
-):
+async def rename_chat(chat_id: str, data: RenameChatRequest):
 
     from app.services.chat_service import rename_chat_service
 
-    return await rename_chat_service(
-        chat_id,
-        data.title
-)
+    return await rename_chat_service(chat_id, data.title)
+
 
 # Send Chat Message
 @router.post("/chat", response_model=ChatResponse)
@@ -55,9 +52,7 @@ async def chat_endpoint(data: ChatRequest):
     )
 
     # Generate AI Response
-    ai_response = await generate_ai_response(
-        data.message
-    )
+    ai_response = await generate_ai_response(data.message)
 
     # Save AI Message
     await add_message(
@@ -71,6 +66,7 @@ async def chat_endpoint(data: ChatRequest):
         "chat_id": chat_id,
     }
 
+
 # Delete Chat
 @router.delete("/chat/{chat_id}")
 async def delete_single_chat(chat_id: str):
@@ -78,6 +74,7 @@ async def delete_single_chat(chat_id: str):
     from app.services.chat_service import delete_chat
 
     return await delete_chat(chat_id)
+
 
 # Get All Chats
 @router.get("/chats")
