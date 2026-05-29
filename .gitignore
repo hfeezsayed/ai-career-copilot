@@ -17,3 +17,5 @@ __pycache__/
 
 # logs
 *.log
+
+temp.docx

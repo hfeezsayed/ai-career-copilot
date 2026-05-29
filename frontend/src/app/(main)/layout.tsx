@@ -25,7 +25,7 @@ export default function MainLayout({
     },
     {
       name: "Job Matcher",
-      href: "/jobs",
+      href: "/job-matcher",
     },
     {
       name: "Roadmap",

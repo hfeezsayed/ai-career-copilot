@@ -1,11 +1,19 @@
 import fitz
+
 from docx import Document
 
+from fastapi import UploadFile
 
-def extract_text_from_pdf(file_bytes: bytes) -> str:
+
+def extract_text_from_pdf(
+    file_bytes: bytes,
+) -> str:
     text = ""
 
-    pdf = fitz.open(stream=file_bytes, filetype="pdf")
+    pdf = fitz.open(
+        stream=file_bytes,
+        filetype="pdf",
+    )
 
     for page in pdf:
         text += page.get_text()
@@ -13,7 +21,9 @@ def extract_text_from_pdf(file_bytes: bytes) -> str:
     return text
 
 
-def extract_text_from_docx(file_bytes: bytes) -> str:
+def extract_text_from_docx(
+    file_bytes: bytes,
+) -> str:
     text = ""
 
     with open("temp.docx", "wb") as f:
@@ -25,3 +35,19 @@ def extract_text_from_docx(file_bytes: bytes) -> str:
         text += para.text + "\n"
 
     return text
+
+
+async def extract_text_from_file(
+    file: UploadFile,
+) -> str:
+    file_bytes = await file.read()
+
+    filename = file.filename.lower()
+
+    if filename.endswith(".pdf"):
+        return extract_text_from_pdf(file_bytes)
+
+    elif filename.endswith(".doc") or filename.endswith(".docx"):
+        return extract_text_from_docx(file_bytes)
+
+    return ""

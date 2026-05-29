@@ -24,7 +24,7 @@ export const sidebarLinks = [
   },
   {
     title: "Job Matcher",
-    href: "/jobs",
+    href: "/job-matcher",
     icon: BriefcaseBusiness,
   },
   {

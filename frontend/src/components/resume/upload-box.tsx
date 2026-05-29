@@ -5,6 +5,11 @@ import { useState } from "react";
 import { Upload } from "lucide-react";
 
 import { uploadResume } from "@/lib/api";
+import {
+  saveResumeScore,
+  saveRecentActivity,
+  saveLastUpdated,
+} from "@/lib/dashboard-storage";
 
 type Props = {
   setAnalysis: (data: any) => void;
@@ -29,7 +34,15 @@ export default function UploadBox({ setAnalysis }: Props) {
 
       console.log("UPLOAD RESPONSE:", data);
 
-      // IMPORTANT
+      // Save ATS Score for Dashboard
+      saveResumeScore(data.ats_score);
+
+      // Save Recent Activity
+      saveRecentActivity(`📄 Resume analyzed → ATS Score ${data.ats_score}%`);
+
+      saveLastUpdated();
+
+      // Update Resume Analysis UI
       setAnalysis(data);
 
       alert("Resume uploaded successfully!");
@@ -62,7 +75,7 @@ export default function UploadBox({ setAnalysis }: Props) {
           suggestions.
         </p>
 
-        {/* Button */}
+        {/* Upload Button */}
         <div className="mt-8">
           <label
             className="

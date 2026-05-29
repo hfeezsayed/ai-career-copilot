@@ -1,6 +1,44 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import { FileText, BriefcaseBusiness, Target } from "lucide-react";
 
+import QuickActions from "@/components/dashboard/quick-actions";
+
+import RecentActivity from "@/components/dashboard/recent-activity";
+
+import {
+  getResumeScore,
+  getJobMatchScore,
+  getCareerGoal,
+  getRecentActivities,
+} from "@/lib/dashboard-storage";
+
 export default function DashboardPage() {
+  const [resumeScore, setResumeScore] = useState(0);
+
+  const [jobMatchScore, setJobMatchScore] = useState(0);
+
+  const [careerGoal, setCareerGoal] = useState("Not Set");
+
+  const [activities, setActivities] = useState<string[]>([]);
+
+  const profileCompletion =
+    (resumeScore > 0 ? 33 : 0) +
+    (jobMatchScore > 0 ? 33 : 0) +
+    (careerGoal !== "Not Set" ? 34 : 0);
+
+  useEffect(() => {
+    setResumeScore(getResumeScore());
+
+    setJobMatchScore(getJobMatchScore());
+
+    setCareerGoal(getCareerGoal());
+
+    setActivities(getRecentActivities());
+  }, []);
+
   return (
     <div className="space-y-10 px-10 py-8">
       {/* Header */}
@@ -14,9 +52,9 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      {/* Cards */}
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
-        {/* Card 1 */}
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {/* Resume Score */}
         <div className="rounded-3xl border border-white/10 bg-[#0B0B0F] p-7">
           <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-500/20">
             <FileText className="text-violet-400" size={28} />
@@ -24,12 +62,12 @@ export default function DashboardPage() {
 
           <p className="text-base text-zinc-300">Resume Score</p>
 
-          <h2 className="mt-3 text-2xl font-bold text-white">82%</h2>
+          <h2 className="mt-3 text-2xl font-bold text-white">{resumeScore}%</h2>
 
-          <p className="mt-4 text-zinc-500">Strong profile for AI roles</p>
+          <p className="mt-4 text-zinc-500">Latest ATS analysis score</p>
         </div>
 
-        {/* Card 2 */}
+        {/* Job Match */}
         <div className="rounded-3xl border border-white/10 bg-[#0B0B0F] p-7">
           <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-pink-500/20">
             <BriefcaseBusiness className="text-pink-400" size={28} />
@@ -37,12 +75,14 @@ export default function DashboardPage() {
 
           <p className="text-base text-zinc-300">Job Match</p>
 
-          <h2 className="mt-3 text-2xl font-bold text-white">76%</h2>
+          <h2 className="mt-3 text-2xl font-bold text-white">
+            {jobMatchScore}%
+          </h2>
 
-          <p className="mt-4 text-zinc-500">Matches current target jobs</p>
+          <p className="mt-4 text-zinc-500">Latest job match result</p>
         </div>
 
-        {/* Card 3 */}
+        {/* Career Goal */}
         <div className="rounded-3xl border border-white/10 bg-[#0B0B0F] p-7">
           <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500/20">
             <Target className="text-blue-400" size={28} />
@@ -51,12 +91,30 @@ export default function DashboardPage() {
           <p className="text-base text-zinc-300">Active Goal</p>
 
           <h2 className="mt-3 text-2xl font-bold leading-tight text-white">
-            Frontend AI Engineer
+            {careerGoal}
           </h2>
 
-          <p className="mt-4 text-zinc-500">Roadmap in progress</p>
+          <p className="mt-4 text-zinc-500">Current roadmap target</p>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-[#0B0B0F] p-7">
+          <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/20">
+            <Target className="text-emerald-400" size={28} />
+          </div>
+
+          <p className="text-base text-zinc-300">Profile Completion</p>
+
+          <h2 className="mt-3 text-2xl font-bold text-white">
+            {profileCompletion}%
+          </h2>
+
+          <p className="mt-4 text-zinc-500">Career profile readiness</p>
         </div>
       </div>
+
+      <QuickActions />
+
+      <RecentActivity activities={activities} />
     </div>
   );
 }
