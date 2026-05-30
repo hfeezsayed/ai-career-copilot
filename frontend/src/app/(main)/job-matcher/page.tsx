@@ -67,7 +67,8 @@ export default function JobMatcherPage() {
           max-w-7xl
           space-y-10
           px-4
-          py-6
+          pt-8
+          pb-6
           sm:px-6
           lg:px-8
           xl:px-10

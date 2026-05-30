@@ -40,14 +40,14 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="space-y-10 px-10 py-8">
+    <div className="space-y-10 px-6 py-20 md:px-10 md:py-8">
       {/* Header */}
       <div>
         <h1 className="text-4xl font-bold tracking-tight text-white">
-          Welcome Back 👋
+          Welcome Back,
         </h1>
 
-        <p className="mt-3 text-lg text-zinc-400">
+        <p className="mt-3 text-base md:text-lg text-zinc-400 max-w-2xl">
           Your AI Career Copilot dashboard.
         </p>
       </div>
@@ -55,7 +55,11 @@ export default function DashboardPage() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
         {/* Resume Score */}
-        <div className="rounded-3xl border border-white/10 bg-[#0B0B0F] p-7">
+        <div
+          className="
+        rounded-3xl border border-white/10 bg-[#0B0B0F] p-7 transition-all duration-300 hover:-translate-y-1
+        hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10"
+        >
           <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-500/20">
             <FileText className="text-violet-400" size={28} />
           </div>

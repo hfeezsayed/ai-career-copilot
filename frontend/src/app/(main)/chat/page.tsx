@@ -120,12 +120,14 @@ export default function ChatPage() {
       {/* Main Chat Area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Header */}
-        <div className="border-b border-white/10 px-8 py-5">
-          <h1 className="text-2xl font-semibold">AI Career Copilot</h1>
+        <div className="hidden md:block border-b border-white/10 px-8 py-5">
+          <h1 className="text-lg md:text-2xl font-semibold">
+            AI Career Copilot
+          </h1>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-8 py-8">
+        <div className="flex-1 overflow-y-auto px-4 py-6 md:px-8 md:py-8">
           <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col gap-6">
             {messages.map((message, index) => (
               <ChatMessage
@@ -144,7 +146,7 @@ export default function ChatPage() {
         </div>
 
         {/* Input */}
-        <div className="border-t border-white/10 bg-black px-8 py-4 shrink-0">
+        <div className="border-t border-white/10 bg-black px-4 py-4 md:px-8 shrink-0">
           <div className="mx-auto w-full max-w-4xl">
             <ChatInput onSend={handleSendMessage} />
           </div>

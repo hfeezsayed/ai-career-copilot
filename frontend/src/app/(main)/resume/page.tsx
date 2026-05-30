@@ -13,11 +13,11 @@ export default function ResumePage() {
   const [analysis, setAnalysis] = useState<any>(null);
 
   return (
-    <div className="min-h-screen bg-black text-white px-5 md:px-8 py-6">
+    <div className="min-h-screen bg-black text-white px-4 py-5 sm:px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-3xl font-bold tracking-tight">
+        <div className="mb-8 pl-15 md:pl-0">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
             Resume Analyzer 📄
           </h1>
 
@@ -28,7 +28,7 @@ export default function ResumePage() {
         </div>
 
         {/* Upload Section */}
-        <div className="mb-8">
+        <div className="mb-8 pl-12 md:pl-0">
           <UploadBox setAnalysis={setAnalysis} />
         </div>
 
@@ -36,7 +36,7 @@ export default function ResumePage() {
         {analysis && (
           <>
             {/* Top Section */}
-            <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 mb-8 items-start">
+            <div className="grid grid-cols-1 gap-6 xl:grid-cols-12 mb-8 items-start">
               {/* Left Score Cards */}
               <div className="xl:col-span-3 space-y-6">
                 <ATSScoreCard
@@ -71,7 +71,7 @@ export default function ResumePage() {
             </div>
 
             {/* Skills */}
-            <div className="mb-8">
+            <div className="mb-8 pl-12 md:pl-0">
               <SkillsCard
                 detectedSkills={analysis.detected_skills}
                 missingSkills={analysis.missing_skills}
@@ -79,12 +79,12 @@ export default function ResumePage() {
             </div>
 
             {/* Resume Overview */}
-            <div className="mb-8">
+            <div className="mb-8 pl-12 md:pl-0">
               <ResumePreview analysis={analysis} />
             </div>
 
             {/* AI Suggestions */}
-            <div className="mb-8">
+            <div className="mb-8 pl-12 md:pl-0">
               <AIFeedback suggestions={analysis.suggestions} />
             </div>
 
