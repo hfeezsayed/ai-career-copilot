@@ -1,15 +1,18 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
 from app.schemas.auth import (
     RegisterRequest,
     LoginRequest,
 )
 
+from app.dependencies.auth import get_current_user
+
 from app.db.mongodb import users_collection
 
 from app.services.auth_service import (
     hash_password,
     verify_password,
+    create_access_token,
 )
 
 router = APIRouter(
@@ -62,10 +65,24 @@ async def login_user(
             detail="Invalid credentials.",
         )
 
+    token = create_access_token(
+        {
+            "email": user["email"],
+        }
+    )
+
     return {
         "message": "Login successful.",
+        "token": token,
         "user": {
             "name": user["name"],
             "email": user["email"],
         },
     }
+
+
+@router.get("/me")
+async def get_me(
+    current_user=Depends(get_current_user),
+):
+    return {"email": current_user["email"]}
