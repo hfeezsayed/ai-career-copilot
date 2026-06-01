@@ -8,12 +8,14 @@ import QuickActions from "@/components/dashboard/quick-actions";
 
 import RecentActivity from "@/components/dashboard/recent-activity";
 
-import {
-  getResumeScore,
-  getJobMatchScore,
-  getCareerGoal,
-  getRecentActivities,
-} from "@/lib/dashboard-storage";
+// import {
+//   getResumeScore,
+//   getJobMatchScore,
+//   getCareerGoal,
+//   getRecentActivities,
+// } from "@/lib/dashboard-storage";
+
+import { getDashboardData } from "@/lib/dashboard";
 
 export default function DashboardPage() {
   const [resumeScore, setResumeScore] = useState(0);
@@ -30,13 +32,30 @@ export default function DashboardPage() {
     (careerGoal !== "Not Set" ? 34 : 0);
 
   useEffect(() => {
-    setResumeScore(getResumeScore());
+    async function loadDashboard() {
+      try {
+        const data = await getDashboardData();
 
-    setJobMatchScore(getJobMatchScore());
+        setResumeScore(data.resume_score);
 
-    setCareerGoal(getCareerGoal());
+        setJobMatchScore(data.job_match_score);
 
-    setActivities(getRecentActivities());
+        setCareerGoal(data.career_goal);
+
+        setActivities(data.recent_activities || []);
+
+        //temporary
+        console.log("DASHBOARD API:", data);
+
+        setResumeScore(data.resume_score);
+        setJobMatchScore(data.job_match_score);
+        setCareerGoal(data.career_goal);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    loadDashboard();
   }, []);
 
   return (

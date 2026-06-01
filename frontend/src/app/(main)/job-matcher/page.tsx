@@ -17,6 +17,14 @@ import {
   saveLastUpdated,
 } from "@/lib/dashboard-storage";
 
+import { updateDashboard } from "@/lib/dashboard";
+
+import {
+  getResumeScore,
+  getCareerGoal,
+  getRecentActivities,
+} from "@/lib/dashboard-storage";
+
 import { analyzeJobMatch } from "@/lib/job-matcher";
 
 import { JobMatchResult } from "@/types/job-matcher";
@@ -33,7 +41,6 @@ export default function JobMatcherPage() {
   const handleAnalyze = async () => {
     if (!resumeFile || !jobDescription) {
       alert("Please upload resume and paste job description");
-
       return;
     }
 
@@ -42,11 +49,27 @@ export default function JobMatcherPage() {
 
       const result = await analyzeJobMatch(resumeFile, jobDescription);
 
+      console.log("JOB MATCH RESULT:", result);
+
+      // Local Storage Update
       saveJobMatchScore(result.match_percentage);
 
       saveRecentActivity(`💼 Job Match checked → ${result.match_percentage}%`);
 
       saveLastUpdated();
+
+      const payload = {
+        resume_score: getResumeScore(),
+        job_match_score: result.match_percentage,
+        career_goal: getCareerGoal(),
+        recent_activities: getRecentActivities(),
+      };
+
+      console.log("DASHBOARD PAYLOAD:", payload);
+
+      const dashboardResponse = await updateDashboard(payload);
+
+      console.log("UPDATE DASHBOARD RESPONSE:", dashboardResponse);
 
       setMatchResult(result);
     } catch (error) {

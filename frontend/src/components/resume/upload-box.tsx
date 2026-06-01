@@ -11,6 +11,8 @@ import {
   saveLastUpdated,
 } from "@/lib/dashboard-storage";
 
+import { updateDashboard } from "@/lib/dashboard";
+
 type Props = {
   setAnalysis: (data: any) => void;
 };
@@ -35,12 +37,23 @@ export default function UploadBox({ setAnalysis }: Props) {
       console.log("UPLOAD RESPONSE:", data);
 
       // Save ATS Score for Dashboard
+      const activity = `📄 Resume analyzed → ATS Score ${data.ats_score}%`;
+
       saveResumeScore(data.ats_score);
 
-      // Save Recent Activity
-      saveRecentActivity(`📄 Resume analyzed → ATS Score ${data.ats_score}%`);
+      saveRecentActivity(activity);
 
       saveLastUpdated();
+
+      await updateDashboard({
+        resume_score: data.ats_score,
+
+        job_match_score: 0,
+
+        career_goal: "Not Set",
+
+        recent_activities: [activity],
+      });
 
       // Update Resume Analysis UI
       setAnalysis(data);
