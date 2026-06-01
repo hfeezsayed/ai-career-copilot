@@ -2,7 +2,6 @@ from openai import OpenAI
 
 from app.core.config import settings
 
-
 client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
 
@@ -71,13 +70,11 @@ async def generate_ai_response(message: str):
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-
         messages=[
             {
                 "role": "system",
                 "content": SYSTEM_PROMPT,
             },
-
             {
                 "role": "user",
                 "content": f"""
@@ -89,7 +86,6 @@ Return response ONLY in markdown format.
 """,
             },
         ],
-
         temperature=0.7,
     )
 
