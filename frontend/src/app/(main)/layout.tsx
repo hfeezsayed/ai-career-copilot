@@ -268,6 +268,25 @@ export default function MainLayout({
             </Link>
           ))}
         </nav>
+        {/* Developed By */}
+        <div className="mt-auto pt-6">
+          <div
+            className="
+                rounded-2xl
+                border border-fuchsia-500/20
+                bg-gradient-to-r
+                from-violet-500/10
+                to-fuchsia-500/10
+                p-4
+            "
+          >
+            <p className="text-[10px] uppercase tracking-widest text-zinc-400">
+              Developed By
+            </p>
+
+            <p className="mt-1 text-sm font-semibold text-white">Hafeez Ali</p>
+          </div>
+        </div>
       </aside>
 
       {/* Main Content */}
