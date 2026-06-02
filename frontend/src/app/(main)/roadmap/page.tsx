@@ -23,6 +23,8 @@ export default function RoadmapPage() {
 
   const [roadmap, setRoadmap] = useState<any[]>([]);
 
+  const [loading] = useState(false);
+
   const handleGenerateRoadmap = () => {
     if (!targetRole || !currentSkills) {
       alert("Please fill all fields");
@@ -105,6 +107,7 @@ export default function RoadmapPage() {
         experienceLevel={experienceLevel}
         setExperienceLevel={setExperienceLevel}
         onGenerate={handleGenerateRoadmap}
+        loading={loading}
       />
 
       {roadmap.length > 0 && <RoadmapResult roadmap={roadmap} />}
