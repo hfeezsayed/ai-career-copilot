@@ -1,4 +1,5 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL!;
 
 
 // SEND MESSAGE
@@ -61,12 +62,13 @@ export async function getSingleChat(
   return response.json();
 }
 
+
+// DELETE CHAT
 export async function deleteChat(
   chatId: string
 ) {
-
   const res = await fetch(
-    `http://127.0.0.1:8000/chat/${chatId}`,
+    `${API_URL}/chat/${chatId}`,
     {
       method: "DELETE",
     }
@@ -75,13 +77,14 @@ export async function deleteChat(
   return await res.json();
 }
 
+
+// RENAME CHAT
 export async function renameChat(
   chatId: string,
   title: string
 ) {
-
   const res = await fetch(
-    `http://127.0.0.1:8000/chat/${chatId}`,
+    `${API_URL}/chat/${chatId}`,
     {
       method: "PUT",
 
@@ -100,22 +103,29 @@ export async function renameChat(
 }
 
 
-// Resume Analyzer
-export async function uploadResume(file: File) {
+// RESUME ANALYZER
+export async function uploadResume(
+  file: File
+) {
   const formData = new FormData();
 
-  formData.append("file", file);
+  formData.append(
+    "file",
+    file
+  );
 
   const response = await fetch(
-    "http://127.0.0.1:8000/resume/upload",
+    `${API_URL}/resume/upload`,
     {
       method: "POST",
       body: formData,
-    },
+    }
   );
 
   if (!response.ok) {
-    throw new Error("Failed to upload resume.");
+    throw new Error(
+      "Failed to upload resume."
+    );
   }
 
   return response.json();
