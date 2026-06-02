@@ -40,16 +40,15 @@ export default function DashboardPage() {
 
         setJobMatchScore(data.job_match_score);
 
-        setCareerGoal(data.career_goal);
+        const savedGoal =
+          localStorage.getItem("careerGoal") || data.career_goal;
+
+        setCareerGoal(savedGoal);
 
         setActivities(data.recent_activities || []);
 
         //temporary
         console.log("DASHBOARD API:", data);
-
-        setResumeScore(data.resume_score);
-        setJobMatchScore(data.job_match_score);
-        setCareerGoal(data.career_goal);
       } catch (error) {
         console.error(error);
       }
