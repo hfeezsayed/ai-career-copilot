@@ -4,6 +4,8 @@ An end-to-end AI-powered career development platform built with **Next.js, FastA
 
 AI Career Copilot helps users analyze resumes, match resumes against job descriptions, generate personalized career roadmaps, chat with an AI career assistant, and track career progress through an interactive dashboard.
 
+🔗 Live Demo: https://ai-career-copilot-omega.vercel.app/
+
 ---
 
 ## ✨ Features
